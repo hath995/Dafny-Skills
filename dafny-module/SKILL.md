@@ -1,6 +1,6 @@
 ---
 name: dafny-module
-description: Use when writing or reading Dafny modules (module, import, export, provides, opened, abstract, refines) — namespaces with controlled exports and refinement.
+description: Use when writing or reading Dafny modules (module, import, export, provides, opened, abstract, refines) or pulling in another .dfy source file (include) — namespaces with controlled exports, refinement, and cross-file includes.
 tags:
   - dafny
   - declaration
@@ -35,7 +35,29 @@ module Impl refines Iface {
 }
 ```
 
+## Including other source files
+
+`include` is a **file-level directive** (not a module construct) that pulls in
+another `.dfy` file so its declarations are available. It must appear at the top
+of the file, before any declarations, with a path relative to the current file.
+
+```dafny
+include "../lib/Math.dfy"
+include "helpers/Seqs.dfy"
+
+module Client {
+  import opened MathLib     // still need `import` to use a module from Math.dfy
+}
+```
+
 ## Notes
+
+- `include "file.dfy"` makes the file's contents available; it is **not** the
+  same as `import` — you still `import` any module you want to use (top-level
+  declarations become directly available).
+- Include paths are relative to the including file; includes are transitive and
+  de-duplicated, so including the same file along multiple paths is harmless.
+- `include` directives must precede all other declarations in the file.
 
 - `export provides f` exposes only the name's signature, hiding the body.
 - `import opened` drops the module qualifier, bringing names into scope directly.

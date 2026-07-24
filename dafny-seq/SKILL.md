@@ -53,7 +53,39 @@ var text := seq(|value|, i requires 0 <= i < |value| => RegToChar(value[i]));
 - Update a position functionally with `q[i := v]` returning a new sequence.
 - Build one with `seq(n, f)` where `f: nat -> T` maps each index; to read another collection inside `f`, add `requires 0 <= i < n` to the lambda (see the comprehension example above).
 
-## Extensionality
+## Pitfalls
+
+### Sequence comprehensions fail for map elements
+
+`[x | x in s :: pred(x)]` triggers **"rbracket expected"** when `T` is a `map<K,V>` type. Dafny cannot parse the `|` separator inside bracket comprehensions for map-typed elements.
+
+**Workaround:** use recursive helper functions:
+
+```dafny
+function SeqFilter(s: seq<Record>, pred: (Record) -> bool): seq<Record>
+  decreases |s|
+{
+  if |s| == 0 then []
+  else if pred(s[0]) then [s[0]] + SeqFilter(s[1..], pred)
+  else SeqFilter(s[1..], pred)
+}
+
+function SeqMap(s: seq<Record>, f: (Record) -> Record): seq<Record>
+  decreases |s|
+{
+  if |s| == 0 then []
+  else [f(s[0])] + SeqMap(s[1..], f)
+}
+```
+
+### `decreases` clause placement
+
+For expression-bodied functions, `decreases` goes after the return type, before `{`:
+
+```dafny
+function F(s: seq<T>): int decreases |s| { ... }  // correct
+// NOT: function F(s: seq<T>): int { ... decreases |s| }
+```
 
 Two sequences are equal iff they have the same length and equal elements at every
 index. When the sides are assembled differently (e.g. `f(xs) + [y]` vs `[x] + f(ys)`
