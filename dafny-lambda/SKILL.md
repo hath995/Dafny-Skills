@@ -1,6 +1,6 @@
 ---
 name: dafny-lambda
-description: Use when writing or reading Dafny lambda expressions ((x) => expr, (x: T, y: T) => expr, or a lambda with a requires clause) — anonymous total functions you can apply and pass around.
+description: "Use when writing or reading Dafny lambda expressions ((x) => expr, (x: T, y: T) => expr, or a lambda with a requires clause) — anonymous total functions you can apply and pass around."
 tags:
   - dafny
   - expression

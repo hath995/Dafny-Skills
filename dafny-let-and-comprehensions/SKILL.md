@@ -1,6 +1,6 @@
 ---
 name: dafny-let-and-comprehensions
-description: Use when writing or reading Dafny let expressions (var x := e; body in expression context), set comprehensions (set x | P :: e), map comprehensions (map x | P :: k := v), or seq(n, f) builders — value-producing binding and collection construction.
+description: "Use when writing or reading Dafny let expressions (var x := e; body in expression context), set comprehensions (set x | P :: e), map comprehensions (map x | P :: k := v), or seq(n, f) builders — value-producing binding and collection construction."
 tags:
   - dafny
   - expression

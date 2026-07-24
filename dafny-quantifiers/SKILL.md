@@ -1,6 +1,6 @@
 ---
 name: dafny-quantifiers
-description: Use when writing or reading Dafny quantifier expressions (forall vars :: body, exists vars :: body, with `| P` filters and `<-` collection domains) — boolean expressions asserting a body holds for all or some values.
+description: "Use when writing or reading Dafny quantifier expressions (forall vars :: body, exists vars :: body, with `| P` filters and `<-` collection domains) — boolean expressions asserting a body holds for all or some values."
 tags:
   - dafny
   - specification

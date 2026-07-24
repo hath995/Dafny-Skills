@@ -1,6 +1,6 @@
 ---
 name: dafny-set
-description: Use when writing or reading Dafny set types (set<T>, iset<T>), or building a set with a comprehension (set x | P :: e, multi-variable, or `<-` domains) — finite and infinite unordered collections with union, difference, intersection, and comprehension.
+description: "Use when writing or reading Dafny set types (set<T>, iset<T>), or building a set with a comprehension (set x | P :: e, multi-variable, or `<-` domains) — finite and infinite unordered collections with union, difference, intersection, and comprehension."
 tags:
   - dafny
   - type
