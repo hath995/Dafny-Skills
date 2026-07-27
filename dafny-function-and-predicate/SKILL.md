@@ -24,10 +24,10 @@ function min(a: nat, b: nat): nat
   if a < b then a else b
 }
 
-function max(a:nat, b: nat): (r: nat) 
+function max(a: nat, b: nat): (r: nat)
   ensures r >= a && r >= b
 {
-
+  if a > b then a else b
 }
 
 predicate win(a: array<int>, j: int)
@@ -37,9 +37,24 @@ predicate win(a: array<int>, j: int)
 }
 ```
 
+## older parameter
+
+Mark a predicate parameter with `older` to indicate its allocatedness follows from non-older parameters. Enables close-ended quantifier reasoning when the predicate involves heap objects.
+
+```dafny
+predicate ReachableVia(source: Node, p: Path, sink: Node, older S: set<Node>)
+  reads S
+  decreases p
+{
+  // Quantifiers in this body are close-ended w.r.t. S —
+  // only range over nodes allocated before the non-older parameters
+}
+```
+
 ## Notes
 
 - Bodies are single expressions, not statement blocks (use `if/then/else`, not `if { }`).
 - A function/predicate that reads heap state needs a `reads` frame (see dafny-frames).
 - `predicate P(...)` is exactly `function P(...): bool`.
 - In Dafny 4 the old `function method` vs `function` split is gone: functions are compiled by default; use `ghost function` for spec-only.
+- `older` on a parameter marks it as "allocated before" — quantifiers in the body are close-ended w.r.t. older parameters, reasoning only over objects allocated before non-older ones.

@@ -34,9 +34,36 @@ method Example()
 }
 ```
 
+## Failure-aware assignment (`:-`)
+
+The `:-` operator unwraps values from a *failure-compatible* type — one declaring `IsFailure()`, `PropagateFailure()`, and `Extract()`. If successful, binds the inner value; if failed, the method returns immediately with the propagated error. Works like monadic bind for early-exit patterns.
+
+```dafny
+datatype Err = Neg
+
+datatype Result<T> = Success(value: T) | Failure(error: Err) {
+  predicate IsFailure() { this.Failure? }
+  function PropagateFailure<U>(): Result<U> requires IsFailure() { Failure(this.error) }
+  function Extract(): T requires !IsFailure() { this.value }
+}
+
+method Test(x: int) returns (res: Result<bool>) {
+  if x < 0 { return Failure(Neg); }
+  return Success(true);
+}
+
+method Caller() returns (res2: Result<bool>) {
+  var unwrapped :- Test(6);    // on failure, returns PropagateFailure() immediately
+  // here, unwrapped is just bool (unwrapped via Extract())
+  return Success(unwrapped);   // if we get here, Test succeeded
+}
+```
+
 ## Notes
 
 - In `a, b := e1, e2` every right-hand side is evaluated using the *old* values before any target is written, so `x, y := y, x` swaps without a temp.
 - Left-hand targets in a parallel assignment must be distinct l-values.
 - A bare `var n: int;` is declared but unassigned; reading it before assignment is a verification error.
 - `var m := 5;` infers the type from the initializer; add `: T` when you want to pin the type.
+- `var v :- expr` requires the RHS type to declare exactly `IsFailure()`, `PropagateFailure()`, and `Extract()`. Any other naming (e.g. `IsSuccess`/`Value`/`Error`) fails with *"member IsFailure does not exist ... in :- statement"*.
+- On success `:-` binds `Extract()`; on failure it returns `PropagateFailure()` immediately from the enclosing method, which must therefore return a compatible error-wrapped type.

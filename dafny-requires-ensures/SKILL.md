@@ -37,3 +37,4 @@ method max(a: nat, b: nat) returns (m: nat)
 - `requires` is the caller's obligation, verified at each call site; inside the body it is assumed.
 - `ensures` is the callee's guarantee, verified against the body; callers may assume it after the call.
 - Clauses may reference parameters, results, and (in `ensures`) `old(...)` two-state values.
+- See dafny-frames for heap reasoning predicates: `fresh()`, `unchanged()`, `allocated()`.

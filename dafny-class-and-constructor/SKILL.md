@@ -64,3 +64,24 @@ method Usage() {
 - `static` members belong to the class, not an instance, and are referenced as `C.Max` / `C.Create()`.
 - `object` is the root supertype of all reference types — any class instance can be held in an `object` variable.
 - Instance methods, constructors, and static method calls all bind results to variables like any method: `var c := Counter.Create();`.
+
+## Two-phase constructors
+
+Constructor body has two phases separated by `new;`: initialization phase (before) and post-initialization phase (after). In the init phase, `this` can only be used to assign fields. After `new;`, no restrictions. A `const` field without RHS may only be assigned in the init phase.
+
+```dafny
+class TwoPhase {
+  const c: int   // must be set in init phase if no default
+  var x: int
+
+  constructor(initVal: int)
+    ensures fresh(this)
+  {
+    this.c := initVal;     // init phase: only field assignment allowed
+    new;                    // separator
+    this.x := initVal * 2; // post-init phase: full access to this
+  }
+}
+```
+
+See also dafny-frames for `fresh(this)` in constructor postconditions.

@@ -37,3 +37,12 @@ method PrintRegs(value: seq<int>) {
 - May carry a `requires` clause to constrain inputs (making it partial over that precondition) and a `reads` clause if it reads heap state.
 - The `i requires 0 <= i < |value| => ...` form gives the lambda a precondition Dafny uses to justify the indexing `value[i]`.
 - Parameter types may be omitted when inferable from context.
+
+## Lambda with reads clause
+
+A lambda that accesses heap objects (arrays, class fields) needs a `reads` clause so Dafny can track its frame. Common in array initializers:
+
+```dafny
+var cur := new T[n, n]((i, j) reads a =>
+    if 0 <= i < a.Length0 && 0 <= j < a.Length1 then a[i, j] else Zero());
+```

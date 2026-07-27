@@ -33,6 +33,17 @@ method Count(n: nat, a: array<int>)
     i := i + 1;
   }
 }
+
+// Opt out of termination checking entirely
+method RunForever()
+  decreases *   // allows possible non-termination
+{
+  while true
+    decreases *
+  {
+    print "still running\n";
+  }
+}
 ```
 
 ## Notes
@@ -40,4 +51,4 @@ method Count(n: nat, a: array<int>)
 - The metric must strictly decrease each step and be bounded below (e.g. a `nat` or a well-founded ordering).
 - Often inferred automatically; supply it explicitly when Dafny cannot guess or guesses wrong.
 - Can be a lexicographic tuple: `decreases x, y` decreases when `x` drops, or `x` equal and `y` drops.
-- Use `decreases *` to explicitly opt out (allows possible non-termination).
+- Use `decreases *` on methods (and loops inside them) to opt out of termination checking entirely. Not allowed on functions—functions must always terminate. Required for infinite loops and concurrent code.
