@@ -1,6 +1,6 @@
 ---
 name: dafny-frames
-description: Use when writing or reading Dafny frame clauses (reads, modifies) and heap reasoning expressions (fresh, unchanged, allocated, old) — declares which heap objects a function may read or method may write, and reason about allocation state.
+description: Use when writing or reading Dafny frame clauses (reads, modifies) and heap reasoning expressions (fresh, unchanged, allocated, old) — declares which heap objects a function may read or method may write, and reason about allocation state. Also triggers on the verifier errors "insufficient reads clause to invoke function" and "assignment may update an object not in the enclosing context's modifies clause".
 tags:
   - dafny
   - specification

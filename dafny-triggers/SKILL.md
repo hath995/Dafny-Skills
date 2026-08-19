@@ -1,6 +1,6 @@
 ---
 name: dafny-triggers
-description: Use when a Dafny quantifier proof fails, is flaky, or times out, or when Dafny warns a quantifier has "no trigger" — controlling SMT instantiation with matching patterns and the {:trigger} attribute.
+description: Use when a Dafny quantifier proof fails, is flaky, or times out, or when Dafny warns "No terms found to trigger on" (a quantifier with no trigger) — controlling SMT instantiation with matching patterns and the {:trigger} attribute.
 tags:
   - dafny
   - specification

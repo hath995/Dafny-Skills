@@ -1,6 +1,6 @@
 ---
 name: dafny-elephant-assignment
-description: Use when writing or reading Dafny failure-propagating assignment (`:-`, the "elephant" operator, with `Outcome`/`Result`-style types) — bind on success, return on failure.
+description: Use when writing or reading Dafny failure-propagating assignment (`:-`, the "elephant" operator, with `Outcome`/`Result`-style types) — bind on success, return on failure. Surfaces as the verifier error "does not have a member IsFailure" when the right-hand side isn't failure-compatible.
 tags:
   - dafny
   - statement

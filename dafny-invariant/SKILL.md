@@ -1,6 +1,6 @@
 ---
 name: dafny-invariant
-description: Use when writing or reading Dafny loop invariants (invariant) — a condition that holds before the loop and after every iteration.
+description: Use when writing or reading Dafny loop invariants (invariant) — a condition that holds before the loop and after every iteration. Also triggers on the verifier errors "loop invariant might not hold on entry" and "loop invariant might not be maintained by the loop".
 tags:
   - dafny
   - specification

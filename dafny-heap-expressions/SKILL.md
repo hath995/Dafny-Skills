@@ -1,6 +1,6 @@
 ---
 name: dafny-heap-expressions
-description: Use when writing or reading Dafny two-state heap expressions (old(), fresh(), unchanged(), allocated()) — reason about pre-state values, allocation, and unchanged heap in specs.
+description: Use when writing or reading Dafny two-state heap expressions (old(), fresh(), unchanged(), allocated()) — reason about pre-state values, allocation, and unchanged heap in specs. Also triggers on the resolver errors "old expressions are allowed only in specification and ghost contexts", "fresh expressions are allowed only in specification and ghost contexts", and "unchanged expressions are allowed only in specification and ghost contexts".
 tags:
   - dafny
   - specification

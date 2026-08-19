@@ -1,6 +1,6 @@
 ---
 name: dafny-decreases
-description: Use when writing or reading Dafny termination metrics (decreases) on recursive functions/methods and loops — proves termination to the verifier.
+description: Use when writing or reading Dafny termination metrics (decreases) on recursive functions/methods and loops — proves termination to the verifier. Also triggers on the verifier errors "decreases expression might not decrease" and "decreases expression must be bounded below by 0 at the end of the loop iteration".
 tags:
   - dafny
   - specification

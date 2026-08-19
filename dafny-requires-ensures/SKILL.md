@@ -1,6 +1,6 @@
 ---
 name: dafny-requires-ensures
-description: Use when writing or reading Dafny preconditions and postconditions (requires, ensures) — declares a method's or function's input obligations and output guarantees.
+description: Use when writing or reading Dafny preconditions and postconditions (requires, ensures) — declares a method's or function's input obligations and output guarantees. Also triggers on the verifier errors "a precondition for this call might not hold" and "postcondition might not hold on this return path".
 tags:
   - dafny
   - specification

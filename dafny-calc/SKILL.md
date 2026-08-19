@@ -1,6 +1,6 @@
 ---
 name: dafny-calc
-description: Use when writing or reading Dafny calculational proofs (calc) — a structured chain of steps joined by relational operators that proves an (in)equality transitively.
+description: Use when writing or reading Dafny calculational proofs (calc) — a structured chain of steps joined by relational operators that proves an (in)equality transitively. Also triggers on the parser/verifier errors "the main operator of a calculation must be transitive" and "this operator cannot continue this calculation".
 tags:
   - dafny
   - specification

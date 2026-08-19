@@ -1,6 +1,6 @@
 ---
 name: dafny-assert-assume
-description: Use when writing or reading Dafny proof statements (assert, assume) — assert is statically checked, assume is trusted without proof.
+description: Use when writing or reading Dafny proof statements (assert, assume) — assert is statically checked, assume is trusted without proof. Surfaces as the verifier error "assertion might not hold" when a failed assert can't be proved.
 tags:
   - dafny
   - specification

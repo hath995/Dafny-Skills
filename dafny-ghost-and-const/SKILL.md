@@ -1,6 +1,6 @@
 ---
 name: dafny-ghost-and-const
-description: Use when writing or reading Dafny specification-only or immutable state (ghost, const, ghost const, static const) — marks values erased at compile time or fixed constants.
+description: Use when writing or reading Dafny specification-only or immutable state (ghost, const, ghost const, static const) — marks values erased at compile time or fixed constants. Also triggers when Dafny reports a ghost variable, or a call to a ghost function/method, "allowed only in specification contexts".
 tags:
   - dafny
   - declaration

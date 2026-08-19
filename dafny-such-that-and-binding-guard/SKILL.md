@@ -1,6 +1,6 @@
 ---
 name: dafny-such-that-and-binding-guard
-description: Use when writing or reading Dafny such-that assignment and binding guards (`:|`, `:| assume`, `if x :| P`) — pick an arbitrary value satisfying a predicate.
+description: Use when writing or reading Dafny such-that assignment and binding guards (`:|`, `:| assume`, `if x :| P`) — pick an arbitrary value satisfying a predicate. Also triggers on the compiler error "Dafny's heuristics cannot find any bound for variable" when `:|` can't be compiled.
 tags:
   - dafny
   - statement

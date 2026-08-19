@@ -1,6 +1,6 @@
 ---
 name: dafny-newtype-and-subset
-description: Use when writing or reading Dafny constrained/derived numeric types (newtype, type synonym, subset type, as) — a distinct new type vs. an assignable subset or alias.
+description: Use when writing or reading Dafny constrained/derived numeric types (newtype, type synonym, subset type, as) — a distinct new type vs. an assignable subset or alias. Also triggers on the verifier error "value does not satisfy the subset constraints" when a constructed value can't be proved to meet the type's predicate.
 tags:
   - dafny
   - declaration
