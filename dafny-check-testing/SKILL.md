@@ -1,33 +1,55 @@
 ---
 name: dafny-check-testing
 description: Use when writing property-based tests with the DafnyCheck library — generators (incl. custom/recursive datatypes), testing pure functions and heap-mutating methods, and the seeded/random runner.
-version: 1.1.0
+version: 1.2.0
+related_skills:
+  - lemmata-dependencies
 ---
 
 # Dafny + DafnyCheck Property-Based Testing
 
 ## Project Setup
 
-- **Location**: `deps/dafnycheck` (or similar lemmata-managed project)
-- **Toolchain**: lemmata manages dependencies; Dafny 4.10+
-- **Verify command**: `dafny.exe verify "<path>"` — use forward slashes in WSL bash
+DafnyCheck is the `dafnycheck` package on the Lemmata registry (see
+`lemmata-dependencies`). In a lem project, add it as a **dev** dependency so
+it never ships to your consumers:
+
+```bash
+lem add dafnycheck --dev     # → [test.dependencies]; adopts standard-libraries into [test.options]
+```
+
+```toml
+# lemmata.toml: tests are compiled only by lem test / lem run
+[test.source]
+include = ["tests/**/*.dfy"]
+```
+
+```bash
+lem test                     # every {:test} method in the project + tests
+lem test tests/FooTest.dfy   # just one file (+ the library closure)
+```
+
+No `include` lines are needed. `lem restore` links `deps/dafnycheck.doo` as
+a library, so test files only `import` its modules. To read DafnyCheck's
+source, run `lem restore --source` (then see `lemmata-dependencies` for
+switching back).
+
+Outside a lem project (DafnyCheck vendored as plain source), `include` its
+`src/DafnyCheck.dfy` and `src/Arbitrary.dfy` and pass
+`--standard-libraries`. In WSL bash, use forward slashes in paths.
 
 ## DafnyCheck Library
 
-Located at `deps/dafnycheck/src/`. Key files:
-- `DafnyCheck.dfy` — test runner entry points
-- `Arbitrary.dfy` — generators (Arbitrary<T>)
-- `RunConfig.dfy`, `TestResult.dfy`, `Reporting.dfy`
+Modules (source under `src/`):
+- `DafnyCheck` (`DafnyCheck.dfy`): test runner entry points
+- `Arbitraries` (`Arbitrary.dfy`): generators (`Arbitrary<T>`)
+- `RunConfigs`, plus `TestResult.dfy` and `Reporting.dfy`
 
-### Includes and Imports
+### Imports
 
-Include paths depend on how DafnyCheck is vendored (e.g.
-`lemmata_deps/dafnycheck/src/`). Import the modules you actually use:
+Import the modules you actually use:
 
 ```dafny
-include "../src/DafnyCheck.dfy"
-include "../src/Arbitrary.dfy"
-
 module MyTests {
   import opened DafnyCheck
   import opened Arbitraries      // generators (note the plural module name)
